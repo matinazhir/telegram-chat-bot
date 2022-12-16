@@ -45,7 +45,7 @@ def start(message):
 @bot.message_handler()
 def message(message):
     # to check message is from admin or others
-    if message.from_user.id is admin_id:
+    if message.from_user.id == admin_id:
         reply_message = message.text
         try:
             sender_id = message.reply_to_message.forward_from.id
