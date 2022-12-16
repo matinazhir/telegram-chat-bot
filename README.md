@@ -1,6 +1,6 @@
 # Telegram Chat Bot with Python
 [![userinfobot](https://img.shields.io/badge/UserInfoBot-Get%20Your%20ID-blue)](https://t.me/userinfobot)
-[![userinfobot](https://img.shields.io/badge/Requirements-See%20Here-green)](https://github.com/matinazhir/chatbot/blob/master/requirements.txt)
+[![userinfobot](https://img.shields.io/badge/Requirements-See%20Here-green)](https://github.com/matinazhir/telegram_chat_bot/blob/master/requirements.txt)
 
 It's a telegram bot that coded with python. By this bot you can chat with people anonymously.
 This bot forward others message to you and you can reply them with replying their messages.
