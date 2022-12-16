@@ -23,4 +23,4 @@ When the user clicks or touches the start button in bot, the bot will save the u
 4. Connect to your virtual environment using ```source .yourenvname/bin/activate```.
 5. From the project folder, install packages using ```pip install -r requirements.txt```.
 6. Add your telegram id to ```api.py``` (You can get your telegram id by badge that placed on top), and add your bot token.
-7. Now environment is ready. Run it by ```python main.py```.
+7. Now environment is ready. Run it by ```python app/main.py```.
