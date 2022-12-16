@@ -18,7 +18,7 @@ When the user clicks or touches the start button in bot, the bot will save the u
 # How to Run
 
 1. Install python3, pip3, virtualenv, in your system.
-2. Clone the project ```git clone https://github.com/matinazhir/chatbot && cd chatbot```.
+2. Clone the project ```git clone https://github.com/matinazhir/telegram_chat_bot && cd telegram_chat_bot```.
 3. In the project folder create a virtual environment using ```python3 -m venv .yourenvname``` for linux and ```python -m venv .yourenvname``` for windows.
 4. Connect to your virtual environment using ```source .yourenvname/bin/activate```.
 5. From the project folder, install packages using ```pip install -r requirements.txt```.
