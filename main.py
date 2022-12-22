@@ -1,11 +1,10 @@
-import telebot
 import json
+from telebot import TeleBot
 from api import bot_token, admin_id
+tb = TeleBot(bot_token)
 
-bot = telebot.TeleBot(bot_token)
 
-
-@bot.message_handler(commands=['start'])
+@tb.message_handler(commands=['start'])
 def start(message):
     # a ready message to send when user touch the start button
     start_message = "Now, You can start chating!"
@@ -38,19 +37,22 @@ def start(message):
     -UserName: {}
     -UserID: {}
     """.format(sender_fn, sender_ln, sender_un, sender_id)
-    bot.send_message(admin_id, user_alert)
-    bot.send_message(message.from_user.id, start_message)
+    tb.send_message(admin_id, user_alert)  # send info to admin
+    # send welcome to user
+    tb.send_message(message.from_user.id, start_message)
 
 
-@bot.message_handler()
+# with content_types bot can gest messages includes all type of files
+@tb.message_handler(content_types=["document", "video", "photo", "audio",
+                                   "voice", "sticker", "text"])
 def message(message):
     # to check message is from admin or others
     if message.from_user.id == admin_id:
         reply_message = message.text
-        try:
+        try:  # if message is from admin, send it to user
             sender_id = message.reply_to_message.forward_from.id
-            bot.send_message(sender_id, reply_message)
-        except AttributeError:
+            tb.send_message(sender_id, reply_message)
+        except AttributeError:  # if the bot was unable to get user id
             """
             if user uses privacy settings the bot won't get it's id
             so the bot opens a file that belongs to the user
@@ -60,11 +62,11 @@ def message(message):
             sender_fn = str(message.reply_to_message.forward_sender_name)
             with open("user_data/{}.json".format(sender_fn), 'r') as f:
                 user = json.load(f)
-                bot.send_message(int(user["id"]), reply_message)
-    else:
-        sender_id = message.from_user.id
-        bot.forward_message(admin_id, message.chat.id, message.id)
+                # send message to user
+                tb.send_message(int(user["id"]), reply_message)
+    else:  # it will forward messages from user to admin
+        tb.forward_message(admin_id, message.chat.id, message.id)
 
 
 print("Bot Started!")
-bot.polling()
+tb.polling()
