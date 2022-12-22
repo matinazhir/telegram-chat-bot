@@ -28,7 +28,7 @@ def start(message):
         "firstname": sender_fn,
         "lastname": sender_ln
     }
-    path = "./data/{}.json".format(sender_fn)
+    path = "user_data/{}.json".format(sender_fn)
     with open(path, "w") as f:
         json.dump(userdata, f)
     # message that includes user's data will send to admin
@@ -58,7 +58,7 @@ def message(message):
             so the bot can gets the user's id in this way
             """
             sender_fn = str(message.reply_to_message.forward_sender_name)
-            with open("./data/{}.json".format(sender_fn), 'r') as f:
+            with open("user_data/{}.json".format(sender_fn), 'r') as f:
                 user = json.load(f)
                 bot.send_message(int(user["id"]), reply_message)
     else:
