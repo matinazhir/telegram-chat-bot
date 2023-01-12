@@ -1,7 +1,7 @@
 import json
+import config
 from telebot import TeleBot
-from api import bot_token, admin_id
-tb = TeleBot(bot_token)
+tb = TeleBot(config.bot_token)
 
 
 @tb.message_handler(commands=['start'])
@@ -37,7 +37,7 @@ def start(message):
     -UserName: {}
     -UserID: {}
     """.format(sender_fn, sender_ln, sender_un, sender_id)
-    tb.send_message(admin_id, user_alert)  # send info to admin
+    tb.send_message(config.admin_id, user_alert)  # send info to admin
     # send welcome to user
     tb.send_message(message.from_user.id, start_message)
 
@@ -47,7 +47,7 @@ def start(message):
                                    "voice", "sticker", "text"])
 def message(message):
     # to check message is from admin or others
-    if message.from_user.id == admin_id:
+    if message.from_user.id == config.admin_id:
         reply_message = message.text
         try:  # if message is from admin, send it to user
             sender_id = message.reply_to_message.forward_from.id
@@ -65,7 +65,7 @@ def message(message):
                 # send message to user
                 tb.send_message(int(user["id"]), reply_message)
     else:  # it will forward messages from user to admin
-        tb.forward_message(admin_id, message.chat.id, message.id)
+        tb.forward_message(config.admin_id, message.chat.id, message.id)
 
 
 print("Bot Started!")
